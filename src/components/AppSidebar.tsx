@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { BookOpen, Settings, ClipboardList, MessagesSquare, LineChart, GraduationCap, Calendar, LayoutDashboard, ShieldCheck, Sparkles, BookMarked, Moon, Sun, Trophy, Award } from "lucide-react";
+import { BookOpen, Settings, ClipboardList, MessagesSquare, LineChart, GraduationCap, Calendar, LayoutDashboard, ShieldCheck, Sparkles, BookMarked, Moon, Sun, Trophy, Award, Network, Printer } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -31,6 +31,9 @@ export function AppSidebar() {
 
   const roleItems: Item[] = [
     { title: "Quiz generator", url: "/quiz", icon: Sparkles },
+    { title: "Flashcards", url: "/flashcards", icon: BookMarked },
+    { title: "Mind maps", url: "/mindmap", icon: Network },
+    { title: "Worksheets", url: "/worksheet", icon: Printer },
     { title: "Homework", url: "/homework", icon: BookMarked },
   ];
   if (role === "teacher" || role === "admin") {

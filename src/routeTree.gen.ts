@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorksheetRouteImport } from './routes/worksheet'
 import { Route as WeeklyQuizRouteImport } from './routes/weekly-quiz'
 import { Route as TeacherRouteImport } from './routes/teacher'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -18,6 +19,7 @@ import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as ParentDashboardRouteImport } from './routes/parent-dashboard'
 import { Route as ParentChatRouteImport } from './routes/parent-chat'
 import { Route as ParentRouteImport } from './routes/parent'
+import { Route as MindmapRouteImport } from './routes/mindmap'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as HomeworkRouteImport } from './routes/homework'
@@ -38,6 +40,11 @@ import { Route as ApiMindmapRouteImport } from './routes/api/mindmap'
 import { Route as ApiGenerateRouteImport } from './routes/api/generate'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const WorksheetRoute = WorksheetRouteImport.update({
+  id: '/worksheet',
+  path: '/worksheet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WeeklyQuizRoute = WeeklyQuizRouteImport.update({
   id: '/weekly-quiz',
   path: '/weekly-quiz',
@@ -81,6 +88,11 @@ const ParentChatRoute = ParentChatRouteImport.update({
 const ParentRoute = ParentRouteImport.update({
   id: '/parent',
   path: '/parent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MindmapRoute = MindmapRouteImport.update({
+  id: '/mindmap',
+  path: '/mindmap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -191,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/homework': typeof HomeworkRoute
   '/leaderboard': typeof LeaderboardRoute
   '/login': typeof LoginRoute
+  '/mindmap': typeof MindmapRoute
   '/parent': typeof ParentRoute
   '/parent-chat': typeof ParentChatRoute
   '/parent-dashboard': typeof ParentDashboardRoute
@@ -200,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/teacher': typeof TeacherRoute
   '/weekly-quiz': typeof WeeklyQuizRoute
+  '/worksheet': typeof WorksheetRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
   '/api/mindmap': typeof ApiMindmapRoute
@@ -221,6 +235,7 @@ export interface FileRoutesByTo {
   '/homework': typeof HomeworkRoute
   '/leaderboard': typeof LeaderboardRoute
   '/login': typeof LoginRoute
+  '/mindmap': typeof MindmapRoute
   '/parent': typeof ParentRoute
   '/parent-chat': typeof ParentChatRoute
   '/parent-dashboard': typeof ParentDashboardRoute
@@ -230,6 +245,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/teacher': typeof TeacherRoute
   '/weekly-quiz': typeof WeeklyQuizRoute
+  '/worksheet': typeof WorksheetRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
   '/api/mindmap': typeof ApiMindmapRoute
@@ -252,6 +268,7 @@ export interface FileRoutesById {
   '/homework': typeof HomeworkRoute
   '/leaderboard': typeof LeaderboardRoute
   '/login': typeof LoginRoute
+  '/mindmap': typeof MindmapRoute
   '/parent': typeof ParentRoute
   '/parent-chat': typeof ParentChatRoute
   '/parent-dashboard': typeof ParentDashboardRoute
@@ -261,6 +278,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/teacher': typeof TeacherRoute
   '/weekly-quiz': typeof WeeklyQuizRoute
+  '/worksheet': typeof WorksheetRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
   '/api/mindmap': typeof ApiMindmapRoute
@@ -284,6 +302,7 @@ export interface FileRouteTypes {
     | '/homework'
     | '/leaderboard'
     | '/login'
+    | '/mindmap'
     | '/parent'
     | '/parent-chat'
     | '/parent-dashboard'
@@ -293,6 +312,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/teacher'
     | '/weekly-quiz'
+    | '/worksheet'
     | '/api/chat'
     | '/api/generate'
     | '/api/mindmap'
@@ -314,6 +334,7 @@ export interface FileRouteTypes {
     | '/homework'
     | '/leaderboard'
     | '/login'
+    | '/mindmap'
     | '/parent'
     | '/parent-chat'
     | '/parent-dashboard'
@@ -323,6 +344,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/teacher'
     | '/weekly-quiz'
+    | '/worksheet'
     | '/api/chat'
     | '/api/generate'
     | '/api/mindmap'
@@ -344,6 +366,7 @@ export interface FileRouteTypes {
     | '/homework'
     | '/leaderboard'
     | '/login'
+    | '/mindmap'
     | '/parent'
     | '/parent-chat'
     | '/parent-dashboard'
@@ -353,6 +376,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/teacher'
     | '/weekly-quiz'
+    | '/worksheet'
     | '/api/chat'
     | '/api/generate'
     | '/api/mindmap'
@@ -375,6 +399,7 @@ export interface RootRouteChildren {
   HomeworkRoute: typeof HomeworkRoute
   LeaderboardRoute: typeof LeaderboardRoute
   LoginRoute: typeof LoginRoute
+  MindmapRoute: typeof MindmapRoute
   ParentRoute: typeof ParentRoute
   ParentChatRoute: typeof ParentChatRoute
   ParentDashboardRoute: typeof ParentDashboardRoute
@@ -384,6 +409,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   TeacherRoute: typeof TeacherRoute
   WeeklyQuizRoute: typeof WeeklyQuizRoute
+  WorksheetRoute: typeof WorksheetRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiGenerateRoute: typeof ApiGenerateRoute
   ApiMindmapRoute: typeof ApiMindmapRoute
@@ -396,6 +422,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/worksheet': {
+      id: '/worksheet'
+      path: '/worksheet'
+      fullPath: '/worksheet'
+      preLoaderRoute: typeof WorksheetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/weekly-quiz': {
       id: '/weekly-quiz'
       path: '/weekly-quiz'
@@ -457,6 +490,13 @@ declare module '@tanstack/react-router' {
       path: '/parent'
       fullPath: '/parent'
       preLoaderRoute: typeof ParentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mindmap': {
+      id: '/mindmap'
+      path: '/mindmap'
+      fullPath: '/mindmap'
+      preLoaderRoute: typeof MindmapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -607,6 +647,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeworkRoute: HomeworkRoute,
   LeaderboardRoute: LeaderboardRoute,
   LoginRoute: LoginRoute,
+  MindmapRoute: MindmapRoute,
   ParentRoute: ParentRoute,
   ParentChatRoute: ParentChatRoute,
   ParentDashboardRoute: ParentDashboardRoute,
@@ -616,6 +657,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   TeacherRoute: TeacherRoute,
   WeeklyQuizRoute: WeeklyQuizRoute,
+  WorksheetRoute: WorksheetRoute,
   ApiChatRoute: ApiChatRoute,
   ApiGenerateRoute: ApiGenerateRoute,
   ApiMindmapRoute: ApiMindmapRoute,
@@ -628,13 +670,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

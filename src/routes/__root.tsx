@@ -133,13 +133,14 @@ function RootComponent() {
     "/chat", "/dashboard", "/quiz", "/flashcards", "/revision", "/planner",
     "/settings", "/weekly-quiz", "/teacher", "/admin", "/parent",
     "/parent-chat", "/parent-dashboard", "/homework", "/leaderboard", "/achievements",
+    "/mindmap", "/worksheet",
   ];
   const showSidebar = PORTAL_ROUTES.some(r => pathname === r || pathname.startsWith(r + "/"));
 
   // Timer only visible on student-facing pages
   const STUDENT_ROUTES = [
     "/dashboard", "/chat", "/quiz", "/flashcards", "/revision", "/planner",
-    "/homework", "/exam-mode", "/achievements",
+    "/homework", "/exam-mode", "/achievements", "/mindmap", "/worksheet",
   ];
   const showTimer = STUDENT_ROUTES.some(r => pathname === r || pathname.startsWith(r + "/"));
 

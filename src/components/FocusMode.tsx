@@ -289,19 +289,42 @@ function playChime() {
       (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AC) return;
     const ctx = new AC();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.connect(g);
-    g.connect(ctx.destination);
-    o.type = "sine";
-    o.frequency.setValueAtTime(880, ctx.currentTime);
-    o.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.4);
-    g.gain.setValueAtTime(0.0001, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
-    o.start();
-    o.stop(ctx.currentTime + 0.65);
-    setTimeout(() => ctx.close().catch(() => {}), 800);
+    const master = ctx.createGain();
+    master.gain.value = 0.35;
+    master.connect(ctx.destination);
+
+    // A proper alarm: three rising bell-like tones with a soft sustain.
+    // Sequence: 880Hz → 1175Hz → 1568Hz (A5 → D6 → G6).
+    const notes: Array<{ freq: number; at: number; dur: number }> = [
+      { freq: 880, at: 0.0, dur: 0.45 },
+      { freq: 1174.66, at: 0.5, dur: 0.45 },
+      { freq: 1567.98, at: 1.0, dur: 0.9 },
+    ];
+
+    const t0 = ctx.currentTime + 0.02;
+    notes.forEach(({ freq, at, dur }) => {
+      // Two oscillators per note for a richer bell texture.
+      const oscA = ctx.createOscillator();
+      const oscB = ctx.createOscillator();
+      const g = ctx.createGain();
+      oscA.type = "sine";
+      oscB.type = "triangle";
+      oscA.frequency.setValueAtTime(freq, t0 + at);
+      oscB.frequency.setValueAtTime(freq * 2, t0 + at);
+      oscA.connect(g);
+      oscB.connect(g);
+      g.connect(master);
+      g.gain.setValueAtTime(0.0001, t0 + at);
+      g.gain.exponentialRampToValueAtTime(0.6, t0 + at + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + at + dur);
+      oscA.start(t0 + at);
+      oscB.start(t0 + at);
+      oscA.stop(t0 + at + dur + 0.05);
+      oscB.stop(t0 + at + dur + 0.05);
+    });
+
+    const totalMs = (notes[notes.length - 1].at + notes[notes.length - 1].dur + 0.2) * 1000;
+    setTimeout(() => ctx.close().catch(() => {}), totalMs + 200);
   } catch {
     /* noop */
   }
