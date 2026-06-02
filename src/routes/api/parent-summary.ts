@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireRole } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/parent-summary")({
   server: {
