@@ -12,6 +12,11 @@ import { CalendarDays, Sparkles, CheckCircle2, Circle, Wand2 } from "lucide-reac
 export const Route = createFileRoute("/planner")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'AI Revision Planner — EduAssist.AI' },
+      { property: "og:description", content: 'Auto-generate a day-by-day CBSE revision plan aligned to your exam date and syllabus.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/planner" },
+      { property: "og:type", content: "website" },
+      
       { title: "AI Revision Planner — EduAssist.AI" },
       { name: "description", content: "Auto-generate a day-by-day CBSE revision plan aligned to your exam date and syllabus." },
     ],

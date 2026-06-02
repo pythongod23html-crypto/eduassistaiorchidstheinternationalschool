@@ -24,6 +24,11 @@ type Homework = {
 export const Route = createFileRoute("/homework")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Homework — EduAssist.AI' },
+      { property: "og:description", content: 'Homework posted by teachers, visible to students and parents.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/homework" },
+      { property: "og:type", content: "website" },
+      
       { title: "Homework — EduAssist.AI" },
       { name: "description", content: "Homework posted by teachers, visible to students and parents." },
     ],

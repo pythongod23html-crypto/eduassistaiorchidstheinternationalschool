@@ -7,6 +7,11 @@ import { Loader2, Sparkles, Check, X, RotateCcw, Trophy } from "lucide-react";
 export const Route = createFileRoute("/quiz")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Quiz Generator — EduAssist.AI' },
+      { property: "og:description", content: 'Instantly generate CBSE practice quizzes on any topic, for any grade.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/quiz" },
+      { property: "og:type", content: "website" },
+      
       { title: "Quiz Generator — EduAssist.AI" },
       { name: "description", content: "Instantly generate CBSE practice quizzes on any topic, for any grade." },
     ],

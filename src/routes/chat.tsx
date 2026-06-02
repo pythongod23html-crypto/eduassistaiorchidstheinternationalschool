@@ -12,6 +12,11 @@ import { ClauseAvatar as SparkAvatar } from "@/components/ClauseAvatar";
 export const Route = createFileRoute("/chat")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Spark — Your AI Tutor' },
+      { property: "og:description", content: 'Chat with Spark, your personal CBSE AI tutor. Get step-by-step explanations, notes, and practice questions adapted to your grade.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/chat" },
+      { property: "og:type", content: "website" },
+      
       { title: "Spark — Your AI Tutor" },
       { name: "description", content: "Chat with Spark, your personal CBSE AI tutor. Get step-by-step explanations, notes, and practice questions adapted to your grade." },
     ],
