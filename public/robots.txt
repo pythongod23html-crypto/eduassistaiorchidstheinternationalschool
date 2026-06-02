@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin-signup
+Disallow: /teacher
+Disallow: /parent
+Disallow: /parent-chat
+Disallow: /parent-dashboard
+Disallow: /settings
+Disallow: /api/
+
+Sitemap: https://eduassistaiorchidstheinternationalschool.lovable.app/sitemap.xml
