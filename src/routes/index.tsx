@@ -15,6 +15,24 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "AI-powered CBSE learning platform for students from Grade 1 to 12. Doubt solving, notes, quizzes, revision and exam prep — adapted to your class." },
       { property: "og:title", content: "EduAssist.AI — Smarter Learning for CBSE Students" },
       { property: "og:description", content: "Personal AI tutor following NCERT and CBSE curriculum. Learn smarter from Class 1 to Class 12." },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/" },
+      { property: "og:type", content: "website" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            { "@type": "Question", name: "Which classes does EduAssist.AI support?", acceptedAnswer: { "@type": "Answer", text: "All CBSE grades from Class 1 to Class 12, across every major subject." } },
+            { "@type": "Question", name: "Does it follow the NCERT syllabus?", acceptedAnswer: { "@type": "Answer", text: "Yes. Explanations, examples and practice align with NCERT and CBSE board guidelines." } },
+            { "@type": "Question", name: "Is it safe for younger students?", acceptedAnswer: { "@type": "Answer", text: "Absolutely. The tutor uses age-appropriate language, refuses unsafe content, and never encourages cheating." } },
+            { "@type": "Question", name: "Can I generate notes and worksheets?", acceptedAnswer: { "@type": "Answer", text: "Yes — ask for notes, MCQs, flashcards, mind maps, formula sheets or full worksheets for any chapter." } },
+            { "@type": "Question", name: "Is it free to start?", acceptedAnswer: { "@type": "Answer", text: "Yes, you can start learning right away. Premium plans unlock advanced revision tools and analytics." } },
+          ],
+        }),
+      },
     ],
   }),
   component: Index,
