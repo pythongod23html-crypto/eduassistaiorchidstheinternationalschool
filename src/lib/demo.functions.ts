@@ -21,13 +21,26 @@ async function ensureUser(username: string, role: Role, meta: Record<string, unk
     await supabaseAdmin.from("user_roles").insert({ user_id: created.user.id, role }).select();
     return created.user.id;
   }
-  // Already exists — find existing user via listUsers (page through up to 500).
+  // Already exists — find existing user and reset password to the demo password
+  // so the login chips always work even if a previous seed used a different one.
   if (error && /registered|exists/i.test(error.message)) {
     let page = 1;
     while (page <= 5) {
       const { data: list } = await supabaseAdmin.auth.admin.listUsers({ page, perPage: 200 });
       const match = list?.users.find((u) => u.email?.toLowerCase() === email);
-      if (match) return match.id;
+      if (match) {
+        await supabaseAdmin.auth.admin.updateUserById(match.id, {
+          password: DEMO_PASSWORD,
+          email_confirm: true,
+        });
+        // Ensure role row exists (ignore duplicate-key errors).
+        await supabaseAdmin
+          .from("user_roles")
+          .insert({ user_id: match.id, role })
+          .select()
+          .then(() => undefined, () => undefined);
+        return match.id;
+      }
       if (!list || list.users.length < 200) break;
       page++;
     }
