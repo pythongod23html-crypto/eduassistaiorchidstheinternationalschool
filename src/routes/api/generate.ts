@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireUser } from "@/lib/api-auth.server";
 
 const QUIZ_TOOL = {
   type: "function",
@@ -64,6 +65,8 @@ export const Route = createFileRoute("/api/generate")({
     handlers: {
       POST: async ({ request }) => {
         try {
+          const authed = await requireUser(request);
+          if (authed instanceof Response) return authed;
           const { type, grade, subject, topic, count } = (await request.json()) as {
             type: "quiz" | "flashcards";
             grade: string;

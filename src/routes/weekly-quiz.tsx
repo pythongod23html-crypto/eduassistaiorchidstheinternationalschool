@@ -1,3 +1,4 @@
+import { authedFetch } from "@/lib/authed-fetch";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { useState } from "react";
@@ -40,7 +41,7 @@ function WeeklyQuizPage() {
     setLoading(true);
     setPack(null);
     try {
-      const r = await fetch("/api/teacher-generate", {
+      const r = await authedFetch("/api/teacher-generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

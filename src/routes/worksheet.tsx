@@ -1,3 +1,4 @@
+import { authedFetch } from "@/lib/authed-fetch";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { useState } from "react";
@@ -38,7 +39,7 @@ function WorksheetPage() {
     if (!topic.trim()) return;
     setLoading(true); setError(null); setSheet(null); setShowAnswers(false);
     try {
-      const res = await fetch("/api/worksheet", {
+      const res = await authedFetch("/api/worksheet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ grade, subject, topic, difficulty }),

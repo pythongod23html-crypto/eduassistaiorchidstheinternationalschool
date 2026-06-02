@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireRole } from "@/lib/api-auth.server";
 
 const TEACHER_TOOL = {
   type: "function",
@@ -55,6 +56,8 @@ export const Route = createFileRoute("/api/teacher-generate")({
     handlers: {
       POST: async ({ request }) => {
         try {
+          const authed = await requireRole(request, ["teacher", "admin"]);
+          if (authed instanceof Response) return authed;
           const { prompt, grade, subject, kind } = (await request.json()) as {
             prompt: string;
             grade: string;

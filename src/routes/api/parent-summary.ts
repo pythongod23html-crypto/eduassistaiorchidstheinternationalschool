@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireRole } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/parent-summary")({
   server: {
     handlers: {
       POST: async ({ request }) => {
         try {
+          const authed = await requireRole(request, ["parent", "teacher", "admin"]);
+          if (authed instanceof Response) return authed;
           const { childName, grade, records } = (await request.json()) as {
             childName: string;
             grade: string;

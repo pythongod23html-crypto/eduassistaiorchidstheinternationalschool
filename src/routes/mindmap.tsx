@@ -1,3 +1,4 @@
+import { authedFetch } from "@/lib/authed-fetch";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { useState } from "react";
@@ -46,7 +47,7 @@ function MindMapPage() {
     if (!topic.trim()) return;
     setLoading(true); setError(null); setMap(null);
     try {
-      const res = await fetch("/api/mindmap", {
+      const res = await authedFetch("/api/mindmap", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ grade, subject, topic }),

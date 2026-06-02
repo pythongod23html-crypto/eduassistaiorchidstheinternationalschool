@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireUser } from "@/lib/api-auth.server";
 
 const WORKSHEET_TOOL = {
   type: "function",
@@ -50,6 +51,8 @@ export const Route = createFileRoute("/api/worksheet")({
     handlers: {
       POST: async ({ request }) => {
         try {
+          const authed = await requireUser(request);
+          if (authed instanceof Response) return authed;
           const { grade, subject, topic, difficulty } = (await request.json()) as {
             grade: string; subject: string; topic: string; difficulty?: "easy" | "medium" | "hard";
           };

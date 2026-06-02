@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireUser } from "@/lib/api-auth.server";
 
 const SYSTEM_PROMPT = (grade: string, subject: string, homework: boolean) => `You are EduAssist.AI, a friendly, encouraging tutor for Indian CBSE students following the NCERT curriculum.
 
@@ -37,6 +38,8 @@ export const Route = createFileRoute("/api/chat")({
     handlers: {
       POST: async ({ request }) => {
         try {
+          const authed = await requireUser(request);
+          if (authed instanceof Response) return authed;
           const { messages, grade, subject, image, homework } = (await request.json()) as {
             messages: { role: "user" | "assistant"; content: string }[];
             grade?: string;

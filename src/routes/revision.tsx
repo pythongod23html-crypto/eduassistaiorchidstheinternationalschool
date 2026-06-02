@@ -1,3 +1,4 @@
+import { authedFetch } from "@/lib/authed-fetch";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -50,7 +51,7 @@ function RevisionPage() {
     setLoading(true);
     setPack(null);
     try {
-      const r = await fetch("/api/revision", {
+      const r = await authedFetch("/api/revision", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ grade, subject, content }),
