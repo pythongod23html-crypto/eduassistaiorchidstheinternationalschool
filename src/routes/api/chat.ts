@@ -38,6 +38,8 @@ export const Route = createFileRoute("/api/chat")({
     handlers: {
       POST: async ({ request }) => {
         try {
+          const authed = await requireUser(request);
+          if (authed instanceof Response) return authed;
           const { messages, grade, subject, image, homework } = (await request.json()) as {
             messages: { role: "user" | "assistant"; content: string }[];
             grade?: string;
