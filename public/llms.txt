@@ -1,0 +1,17 @@
+# EduAssist.AI
+
+> Personal CBSE AI tutor for students from Grade 1 to Grade 12. Doubt solving, notes, quizzes, flashcards, mind maps, worksheets and revision planning aligned to NCERT.
+
+EduAssist.AI is a learning platform built for Indian CBSE classrooms. It offers a conversational AI tutor, quiz and flashcard generators, mind maps, printable worksheets, a revision planner, and a Pomodoro focus mode. Content adapts to the student's class and follows the NCERT syllabus.
+
+## Pages
+
+- [Home](/): Overview of EduAssist.AI, features and supported subjects.
+- [AI Chat Tutor](/chat): Conversational tutor for solving doubts step-by-step.
+- [Quizzes](/quiz): Generate CBSE-style quizzes for any chapter.
+- [Flashcards](/flashcards): Spaced-repetition flashcards on any topic.
+- [Revision](/revision): Personalised revision summaries.
+- [Mind Maps](/mindmap): AI-generated mind maps for chapters and topics.
+- [Worksheets](/worksheet): Printable practice worksheets.
+- [Planner](/planner): Study plan and Pomodoro focus tools.
+- [Login](/login): Sign in to the student, teacher or parent portal.

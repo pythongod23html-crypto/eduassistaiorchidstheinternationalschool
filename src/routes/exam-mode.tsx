@@ -6,6 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 export const Route = createFileRoute("/exam-mode")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Mock Exam Mode — EduAssist.AI' },
+      { property: "og:description", content: "Distraction-free timed mock exam with Spark's grading rubric." },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/exam-mode" },
+      { property: "og:type", content: "website" },
+      
       { title: "Mock Exam Mode — EduAssist.AI" },
       { name: "description", content: "Distraction-free timed mock exam with Spark's grading rubric." },
     ],

@@ -7,6 +7,11 @@ import { Moon, Sun, User, LogOut, Settings as SettingsIcon } from "lucide-react"
 export const Route = createFileRoute("/settings")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Settings — EduAssist.AI' },
+      { property: "og:description", content: 'Manage your EduAssist.AI account, theme, and preferences.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/settings" },
+      { property: "og:type", content: "website" },
+      
       { title: "Settings — EduAssist.AI" },
       { name: "description", content: "Manage your EduAssist.AI account, theme, and preferences." },
     ],

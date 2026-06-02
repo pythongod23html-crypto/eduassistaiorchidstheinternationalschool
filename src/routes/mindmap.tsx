@@ -7,6 +7,11 @@ import { Loader2, Sparkles, Network } from "lucide-react";
 export const Route = createFileRoute("/mindmap")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Mind Map Generator — EduAssist.AI' },
+      { property: "og:description", content: 'Visualize any CBSE topic as a structured, AI-generated mind map.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/mindmap" },
+      { property: "og:type", content: "website" },
+      
       { title: "Mind Map Generator — EduAssist.AI" },
       { name: "description", content: "Visualize any CBSE topic as a structured, AI-generated mind map." },
     ],

@@ -7,6 +7,11 @@ import { Loader2, Sparkles, Printer, Eye, EyeOff } from "lucide-react";
 export const Route = createFileRoute("/worksheet")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Printable Worksheet Generator — EduAssist.AI' },
+      { property: "og:description", content: 'Generate printable CBSE practice worksheets with answer keys.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/worksheet" },
+      { property: "og:type", content: "website" },
+      
       { title: "Printable Worksheet Generator — EduAssist.AI" },
       { name: "description", content: "Generate printable CBSE practice worksheets with answer keys." },
     ],

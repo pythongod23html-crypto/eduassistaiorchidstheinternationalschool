@@ -7,6 +7,11 @@ import { Loader2, Sparkles, ChevronLeft, ChevronRight, RotateCcw } from "lucide-
 export const Route = createFileRoute("/flashcards")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Flashcards Generator — EduAssist.AI' },
+      { property: "og:description", content: 'Generate CBSE study flashcards on any topic and review with flip animations.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/flashcards" },
+      { property: "og:type", content: "website" },
+      
       { title: "Flashcards Generator — EduAssist.AI" },
       { name: "description", content: "Generate CBSE study flashcards on any topic and review with flip animations." },
     ],

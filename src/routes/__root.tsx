@@ -104,6 +104,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "EduAssist.AI",
+              url: "https://eduassistaiorchidstheinternationalschool.lovable.app",
+              description: "Personal CBSE AI tutor for students from Grade 1 to Grade 12.",
+            },
+            {
+              "@type": "WebSite",
+              name: "EduAssist.AI",
+              url: "https://eduassistaiorchidstheinternationalschool.lovable.app",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

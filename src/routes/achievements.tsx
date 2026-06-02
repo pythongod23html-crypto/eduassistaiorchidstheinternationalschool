@@ -6,6 +6,11 @@ import { BADGE_DEFS, useFocusMode } from "@/components/FocusMode";
 export const Route = createFileRoute("/achievements")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Achievements — EduAssist.AI' },
+      { property: "og:description", content: "All badges you've unlocked from focus sessions and study streaks." },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/achievements" },
+      { property: "og:type", content: "website" },
+      
       { title: "Achievements — EduAssist.AI" },
       { name: "description", content: "All badges you've unlocked from focus sessions and study streaks." },
     ],

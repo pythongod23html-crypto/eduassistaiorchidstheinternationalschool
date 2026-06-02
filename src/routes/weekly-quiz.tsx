@@ -10,6 +10,11 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/weekly-quiz")({
   head: () => ({
     meta: [
+      { property: "og:title", content: 'Weekly Quiz — EduAssist.AI' },
+      { property: "og:description", content: 'Generate and publish a weekly quiz for all students.' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/weekly-quiz" },
+      { property: "og:type", content: "website" },
+      
       { title: "Weekly Quiz — EduAssist.AI" },
       { name: "description", content: "Generate and publish a weekly quiz for all students." },
     ],

@@ -9,7 +9,12 @@ import { getLeaderboard } from "@/lib/leaderboard.functions";
 import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/leaderboard")({
-  head: () => ({ meta: [{ title: "Leaderboard — EduAssist.AI" }] }),
+  head: () => ({ meta: [
+      { property: "og:title", content: 'Leaderboard — EduAssist.AI' },
+      { property: "og:description", content: 'EduAssist.AI' },
+      { property: "og:url", content: "https://eduassistaiorchidstheinternationalschool.lovable.app/leaderboard" },
+      { property: "og:type", content: "website" },
+      { title: "Leaderboard — EduAssist.AI" }] }),
   component: LeaderboardPage,
 });
 
