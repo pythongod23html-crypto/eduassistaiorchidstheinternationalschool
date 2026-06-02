@@ -1,3 +1,4 @@
+import { authedFetch } from "@/lib/authed-fetch";
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
@@ -32,7 +33,7 @@ function ParentPage() {
       { subject: "English", chapter: "Reading Comprehension", score: 9, total: 10, kind: "quiz", created_at: new Date().toISOString() },
       { subject: "Social Studies", chapter: "Nationalism in India", score: 8, total: 10, kind: "quiz", created_at: new Date().toISOString() },
     ];
-    fetch("/api/parent-summary", {
+    authedFetch("/api/parent-summary", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

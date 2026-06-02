@@ -1,3 +1,4 @@
+import { authedFetch } from "@/lib/authed-fetch";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { useState } from "react";
@@ -38,7 +39,7 @@ function QuizPage() {
     if (!topic.trim()) return;
     setLoading(true); setError(null); setQuiz(null); setAnswers({}); setSubmitted(false);
     try {
-      const res = await fetch("/api/generate", {
+      const res = await authedFetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "quiz", grade, subject, topic, count }),
