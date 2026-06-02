@@ -1,6 +1,8 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+import { adminExists, bootstrapAdminSignup } from "@/lib/admin-signup.functions";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -12,11 +14,20 @@ export const Route = createFileRoute("/admin-signup")({ component: AdminSignupPa
 
 function AdminSignupPage() {
   const navigate = useNavigate();
+  const checkAdmin = useServerFn(adminExists);
+  const doBootstrap = useServerFn(bootstrapAdminSignup);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const [closed, setClosed] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    checkAdmin()
+      .then((r) => setClosed(r.exists))
+      .catch(() => setClosed(false));
+  }, [checkAdmin]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,17 +35,15 @@ function AdminSignupPage() {
     setInfo(null);
     setLoading(true);
     try {
-      const { data, error: signUpErr } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { emailRedirectTo: `${window.location.origin}/admin` },
-      });
-      if (signUpErr) throw signUpErr;
-      if (data.session) {
-        navigate({ to: "/admin" });
-      } else {
-        setInfo("Account created. Please check your email to confirm, then sign in.");
+      await doBootstrap({ data: { email, password } });
+      // Auto sign-in
+      const { error: signErr } = await supabase.auth.signInWithPassword({ email, password });
+      if (signErr) {
+        setInfo("Admin account created. Please sign in.");
+        navigate({ to: "/login" });
+        return;
       }
+      navigate({ to: "/admin" });
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Signup failed");
     } finally {
@@ -50,29 +59,41 @@ function AdminSignupPage() {
           <CardHeader>
             <CardTitle className="text-2xl">Admin sign up</CardTitle>
             <CardDescription>
-              The first registered user becomes the school admin. After that, only admins can create student & parent accounts.
+              This page provisions the first school administrator. Once an admin exists,
+              new accounts must be created from the admin dashboard.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            {closed === true ? (
+              <div className="space-y-3">
+                <p className="text-sm text-destructive">
+                  Admin signup is closed — an administrator already exists for this school.
+                </p>
+                <Link to="/login" className="text-sm font-medium text-primary hover:underline">
+                  Go to sign in
+                </Link>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={8} />
-              </div>
-              {error && <p className="text-sm text-destructive">{error}</p>}
-              {info && <p className="text-sm text-primary">{info}</p>}
-              <Button type="submit" disabled={loading} className="w-full">
-                {loading ? "Creating…" : "Create admin account"}
-              </Button>
-              <p className="text-center text-xs text-muted-foreground">
-                Already have an account?{" "}
-                <Link to="/login" className="font-medium text-primary hover:underline">Sign in</Link>
-              </p>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={8} />
+                </div>
+                {error && <p className="text-sm text-destructive">{error}</p>}
+                {info && <p className="text-sm text-primary">{info}</p>}
+                <Button type="submit" disabled={loading || closed === null} className="w-full">
+                  {loading ? "Creating…" : "Create admin account"}
+                </Button>
+                <p className="text-center text-xs text-muted-foreground">
+                  Already have an account?{" "}
+                  <Link to="/login" className="font-medium text-primary hover:underline">Sign in</Link>
+                </p>
+              </form>
+            )}
           </CardContent>
         </Card>
       </main>
