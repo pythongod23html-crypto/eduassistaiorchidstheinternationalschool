@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireUser } from "@/lib/api-auth.server";
 
 const MINDMAP_TOOL = {
   type: "function",
