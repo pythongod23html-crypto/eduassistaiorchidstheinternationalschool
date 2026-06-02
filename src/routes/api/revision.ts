@@ -65,6 +65,8 @@ export const Route = createFileRoute("/api/revision")({
     handlers: {
       POST: async ({ request }) => {
         try {
+          const authed = await requireUser(request);
+          if (authed instanceof Response) return authed;
           const { grade, subject, content } = (await request.json()) as {
             grade: string;
             subject: string;
