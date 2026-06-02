@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorksheetRouteImport } from './routes/worksheet'
 import { Route as WeeklyQuizRouteImport } from './routes/weekly-quiz'
 import { Route as TeacherRouteImport } from './routes/teacher'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RevisionRouteImport } from './routes/revision'
 import { Route as QuizRouteImport } from './routes/quiz'
@@ -53,6 +54,11 @@ const WeeklyQuizRoute = WeeklyQuizRouteImport.update({
 const TeacherRoute = TeacherRouteImport.update({
   id: '/teacher',
   path: '/teacher',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsRoute = SettingsRouteImport.update({
@@ -211,6 +217,7 @@ export interface FileRoutesByFullPath {
   '/quiz': typeof QuizRoute
   '/revision': typeof RevisionRoute
   '/settings': typeof SettingsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teacher': typeof TeacherRoute
   '/weekly-quiz': typeof WeeklyQuizRoute
   '/worksheet': typeof WorksheetRoute
@@ -243,6 +250,7 @@ export interface FileRoutesByTo {
   '/quiz': typeof QuizRoute
   '/revision': typeof RevisionRoute
   '/settings': typeof SettingsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teacher': typeof TeacherRoute
   '/weekly-quiz': typeof WeeklyQuizRoute
   '/worksheet': typeof WorksheetRoute
@@ -276,6 +284,7 @@ export interface FileRoutesById {
   '/quiz': typeof QuizRoute
   '/revision': typeof RevisionRoute
   '/settings': typeof SettingsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teacher': typeof TeacherRoute
   '/weekly-quiz': typeof WeeklyQuizRoute
   '/worksheet': typeof WorksheetRoute
@@ -310,6 +319,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/revision'
     | '/settings'
+    | '/sitemap.xml'
     | '/teacher'
     | '/weekly-quiz'
     | '/worksheet'
@@ -342,6 +352,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/revision'
     | '/settings'
+    | '/sitemap.xml'
     | '/teacher'
     | '/weekly-quiz'
     | '/worksheet'
@@ -374,6 +385,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/revision'
     | '/settings'
+    | '/sitemap.xml'
     | '/teacher'
     | '/weekly-quiz'
     | '/worksheet'
@@ -407,6 +419,7 @@ export interface RootRouteChildren {
   QuizRoute: typeof QuizRoute
   RevisionRoute: typeof RevisionRoute
   SettingsRoute: typeof SettingsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TeacherRoute: typeof TeacherRoute
   WeeklyQuizRoute: typeof WeeklyQuizRoute
   WorksheetRoute: typeof WorksheetRoute
@@ -441,6 +454,13 @@ declare module '@tanstack/react-router' {
       path: '/teacher'
       fullPath: '/teacher'
       preLoaderRoute: typeof TeacherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings': {
@@ -655,6 +675,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuizRoute: QuizRoute,
   RevisionRoute: RevisionRoute,
   SettingsRoute: SettingsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TeacherRoute: TeacherRoute,
   WeeklyQuizRoute: WeeklyQuizRoute,
   WorksheetRoute: WorksheetRoute,
