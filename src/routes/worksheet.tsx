@@ -1,6 +1,7 @@
 import { authedFetch } from "@/lib/authed-fetch";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
+import { ClauseAvatar } from "@/components/ClauseAvatar";
 import { useState } from "react";
 import { Loader2, Sparkles, Printer, Eye, EyeOff } from "lucide-react";
 
