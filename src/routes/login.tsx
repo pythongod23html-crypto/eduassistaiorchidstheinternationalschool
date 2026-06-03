@@ -59,7 +59,7 @@ function LoginPage() {
 
   function fillDemo(u: string) {
     setUsername(u);
-    setPassword("Demo1234");
+    setPassword("OrchidEdu#2026");
   }
 
   return (
