@@ -59,7 +59,7 @@ function LoginPage() {
 
   function fillDemo(u: string) {
     setUsername(u);
-    setPassword("Demo1234");
+    setPassword("OrchidEdu#2026");
   }
 
   return (
@@ -73,7 +73,7 @@ function LoginPage() {
           <CardContent>
             <div className="mb-4">
               <p className="mb-2 text-xs font-medium text-muted-foreground">
-                Quick demo login — password <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-foreground">Demo1234</code>
+                Quick demo login — password <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-foreground">OrchidEdu#2026</code>
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {DEMO_ACCOUNTS.map((a) => (
