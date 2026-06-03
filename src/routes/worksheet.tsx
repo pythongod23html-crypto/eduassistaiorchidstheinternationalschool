@@ -68,11 +68,14 @@ function WorksheetPage() {
         <Header />
       </div>
       <main className="mx-auto max-w-4xl px-6 py-10 print:py-0 print:px-0 print:max-w-none">
-        <div className="mb-6 print:hidden">
-          <h1 className="text-3xl font-bold tracking-tight" style={{ fontFamily: "Sora, Inter, sans-serif" }}>
-            Printable <span className="text-gradient">Worksheet</span>
-          </h1>
-          <p className="mt-2 text-muted-foreground">Generate exam-style worksheets you can print or share.</p>
+        <div className="mb-6 flex items-center gap-4 print:hidden">
+          <ClauseAvatar state="idle" size={72} />
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight" style={{ fontFamily: "Sora, Inter, sans-serif" }}>
+              Printable <span className="text-gradient">Worksheet</span>
+            </h1>
+            <p className="mt-2 text-muted-foreground">Generate exam-style worksheets you can print or share.</p>
+          </div>
         </div>
 
         <div className="rounded-2xl border bg-card p-6 shadow-soft print:hidden">
