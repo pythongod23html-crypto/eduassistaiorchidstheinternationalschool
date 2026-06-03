@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const EMAIL_DOMAIN = "eduassist.local";
-const DEMO_PASSWORD = "Demo1234";
+const DEMO_PASSWORD = "OrchidEdu#2026";
 const u2e = (u: string) => `${u.toLowerCase()}@${EMAIL_DOMAIN}`;
 
 type Role = "admin" | "teacher" | "student" | "parent";
